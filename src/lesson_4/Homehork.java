@@ -1,71 +1,90 @@
 package lesson_4;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Homehork {
     public static void main(String[] args) {
-        arrFive();
+//        checkNumberInArray();
+        showIntArray();
     }
 
     public static void checkNumberInArray() {
-        // Создать одномерный массив
-        // Заполнить его определенными числами
-        // Потом использовать класс Сканнер и попросить у пользователя ввести любое число
-        // Проверить есть ли это число в массиве и уже вывести массив без этого числа
-        // Создать новый массив (желательно)
+        Scanner scanner = new Scanner(System.in);
 
-        int[] initialValues = new int[6];
+        int[] originalArray = {1, 2, 3, 4, 5, 3, 6, 7, 3, 8};
 
-        for (int index = 0; index < initialValues.length; index++) {
-            System.out.print("You must enter " + initialValues.length + " integer numbers. " +
-                    "initialValues[" + (index + 1) + "]: ");
-            initialValues[index] = input().nextInt();
+        System.out.print("Исходный массив: ");
+        for (int num : originalArray) {
+            System.out.print(num + " ");
         }
+        System.out.println();
 
-        // КАК МОЖНО ОТСОРТИРОВАТЬ МАССИВ
-        // Вначале отсортировать массив по возрастанию, -9, 0, 5, 10
-        // Использовать вложенный в класс Arrays бинарный пойск
-        // Бинарный пойск работает лишь в отсортированных массивах
+        System.out.print("Введите число для удаления: ");
+        int numberToRemove = scanner.nextInt();
 
-        System.out.print("Please, enter an integer number and we will check whether such value exists in the array: ");
-        int value = input().nextInt();
-        int counter = 0;
+        // Используем ArrayList для удобного удаления элементов
+        ArrayList<Integer> list = new ArrayList<>();
+        boolean found = false;
 
-        for (int initialValue : initialValues) {
-            if (initialValue == value) {
-                // Подсчитывать количество совпадений в массиве
-                counter++;
+        // Копируем элементы в ArrayList, пропуская numberToRemove
+        for (int num : originalArray) {
+            if (num == numberToRemove) {
+                found = true;
+            } else {
+                list.add(num);
             }
         }
 
-        if (counter == 0) {
-            System.out.println("We couldn't find any matches in the array. There is no need for changes.");
-            showIntArray(initialValues);
-        } else {
-            if (counter < initialValues.length) {
-                int[] newArray = new int[initialValues.length - counter];
+        if (!found) {
+            System.out.println("Число " + numberToRemove + " не найдено в массиве.");
+            return;
+        }
 
-                for (int index = 0, newIndex = 0; index < initialValues.length; index++) {
-                    if (initialValues[index] != value) {
-                        newArray[newIndex] = initialValues[index];
-                        newIndex++;
+        // Преобразуем ArrayList обратно в массив
+        int[] newArray = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            newArray[i] = list.get(i);
+        }
+
+        System.out.print("Новый массив: ");
+        for (int num : newArray) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void showIntArray() {
+                // Создаем массив целых чисел
+                int[] numbers = {5, 12, 8, 3, 19, 7, 25, 10, 14};
+
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.print("Введите число для поиска: ");
+                int target = scanner.nextInt();
+
+
+                boolean found = false;
+
+
+                for (int number : numbers) {
+                    if (number == target) {
+                        found = true;
+                        break;
                     }
                 }
 
-                showIntArray(newArray);
-            } else {
-                System.out.println("You have entered a value that matches all elements of the array.");
-                System.out.println("So far, there are no elements anymore.");
+                // Выводим результат
+                if (found) {
+                    System.out.println("Число " + target + " входит в массив.");
+                } else {
+                    System.out.println("Число " + target + " не входит в массив.");
+                }
+
+                // Закрываем Scanner
+                scanner.close();
             }
-        }
-    }
 
 
-    public static void showIntArray(int[] initialValues) {
-        for (int index = 0; index < initialValues.length; index++) {
-            System.out.println("initialValues[" + index + "]: " + initialValues[index]);
-        }
-    }
 
     //    Создайте и заполните массив случайным числами и выведете
 //    максимальное, минимальное и среднее значение.
@@ -79,7 +98,7 @@ public class Homehork {
             arr[i] = Math.random();
         }
         double max = arr[0];
-        double min = arr[0];
+        double min = arr[0]; 
         double mid = 0;
         for (int i = 0; i < arr.length; i++) {
             if (max < arr[i])
@@ -115,21 +134,17 @@ public class Homehork {
         double sumTwo = avg / arrTwo.length;
         System.out.println("среднее арифметическое чисел равно: " + sumTwo);
         int numbs;
-            if (sum>sumTwo){
-            System.out.println("сумма первого массива больше чем второго "  + sum);}
-            else if (sumTwo > sum){
-            System.out.println("сумма второго массива больше чем первого " + sumTwo);}
-            else {
-            System.out.println("они равны");}
-
-
-    }
-
-
-        public static Scanner input () {
-            return new Scanner(System.in);
+        if (sum > sumTwo) {
+            System.out.println("сумма первого массива больше чем второго " + sum);
+        } else if (sumTwo > sum) {
+            System.out.println("сумма второго массива больше чем первого " + sumTwo);
+        } else {
+            System.out.println("они равны");
         }
+
+
     }
+}
 
 
 
