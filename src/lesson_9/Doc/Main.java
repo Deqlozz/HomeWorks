@@ -6,7 +6,7 @@ import lesson_9.Exception.Start555;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void lfmain(String[] args) {
         Register register = new Register();
 
         try
@@ -22,7 +22,7 @@ public class Main {
                 checkDocumentNumber(score.getDocumentNumber());
 
                 register.saveDocument(contract);
-                register.saveDocument(employeeContract);
+                register.saveDocument(employee);
                 register.saveDocument(score);
 
                 for (int i = 0; i < register.documents.length; i++) {
